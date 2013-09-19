@@ -1,0 +1,118 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "_typeplate.scss";
+
+.btcf:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+$base-grey: #F5F2F2;
+$confirm-colour: #8CC771;
+$edit-colour: #81BDDE;
+$delete-colour: #EB7265;
+$off-wht: rgba(white,.4);
+
+@mixin btn-theme($btn-colour) {
+  border: 1px solid darken($btn-colour, 7%);
+  border-left: 1px solid darken($btn-colour, 1%);
+  border-top: 1px solid darken($btn-colour, 1%);
+  background-color: $btn-colour;
+  color: darken($base-grey, 2%);
+  &:hover {
+     background-color: darken($btn-colour, 6%);
+     cursor: pointer;
+     //box-shadow: 0 .125em $off-wht, inset 0 .063em $off-wht, inset 0 -.188em lighten($btn-colour, 2%);
+  }
+  &:active {
+     box-shadow: 0 .063em $off-wht, inset 0 0 1.094em darken($btn-colour, 40%), inset 0 .063em darken($btn-colour, 20%),inset 0 -0.188em darken($btn-colour, 20%);
+  }
+ }
+
+
+
+body {
+  background: lighten($base-grey, 3%);
+}
+
+.product {
+  background: $base-grey;
+  border: 1px solid darken($base-grey, 3%);
+  overflow: hidden;
+  padding: 10px 20px;
+  &:nth-child(odd) {
+    background: darken($base-grey, 1%);
+  }
+  li {
+    display: inline;
+  }
+  li p.title {
+    font-size: $delta+px;
+    width: 10em;
+    display: inline-block;
+  }
+  li p {
+    padding: 0;
+    margin: 0 20px 0 0;
+    display: inline;
+  }
+}
+
+#new-product {
+  overflow: hidden;
+  display: none;
+  &.show-form {
+    display: block;
+    .save, .cancel {
+      display: inline;
+    }
+  }
+}
+
+#product-container {
+  overflow: hidden;
+  .editing {
+    border-color: lighten($edit-colour, 20%);
+    p, .edit, .delete {
+      display: none;
+    }
+    input, .cancel, .save {
+      display: inline;
+    }
+  }
+  input {
+    display: none;
+    margin-bottom: 0;
+  }
+}
+
+.description {
+  font-style: italic;
+}
+
+.product button {
+  float: right;
+  margin-top: 6px;
+}
+.new-product-btn {
+  @include btn-theme($confirm-colour);
+}
+.edit {
+  @include btn-theme($edit-colour);
+}
+.delete {
+  @include btn-theme($delete-colour);
+}
+.save {
+  @include btn-theme($confirm-colour);
+  display: none;
+}
+.cancel {
+  @include btn-theme(lighten($delete-colour, 5%));
+  display: none;
+}
